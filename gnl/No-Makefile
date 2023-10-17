@@ -1,0 +1,33 @@
+# Nombre de la biblioteca
+NAME = get_next_line
+
+# Compilador y Opciones de compilación
+CC = gcc
+CFLAGS = -g -Werror -Wall -Wextra
+
+# Fuentes
+SOURCE = get_next_line_utils.c get_next_line.c main.c
+
+# Objetos
+OBJ = $(SOURCE:.c=.o)
+
+all: $(NAME)
+
+# Regla Principal
+$(NAME): $(OBJ)
+	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
+
+# Regla OBJ
+%.o: %.c
+	$(CC) -c $< $(CFLAGS) -o $@
+
+# Limpieza
+clean:
+	rm -f $(OBJ)
+
+fclean: clean
+	rm -f $(NAME)
+
+re: fclean all
+
+.PHONY: clean all fclean re
